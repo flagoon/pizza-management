@@ -14,8 +14,8 @@ class CreateCategoriesPizzasTable extends Migration
     public function up()
     {
         Schema::create('categories_pizzas', function (Blueprint $table) {
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('pizza_id')->references('id')->on('pizza');
+            $table->integer('category_id');
+            $table->integer('pizza_id');
             $table->timestamps();
         });
     }
