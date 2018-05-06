@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class PizzaSize extends Model
 {
     protected $fillable = [
-        'size-name', 'size-cm', 'size-inch'
+        'size-name', 'size-value'
     ];
 }
