@@ -14,9 +14,9 @@ class CreateIngredientsPizzaSizesTable extends Migration
     public function up()
     {
         Schema::create('ingredients_pizza_sizes', function (Blueprint $table) {
-            $table->integer('ingredient-id');
-            $table->integer('pizza-size-id');
-            $table->integer('ingredient-size-price');
+            $table->integer('ingredient_id');
+            $table->integer('pizza_size_id');
+            $table->integer('ingredient_size_price');
         });
     }
 

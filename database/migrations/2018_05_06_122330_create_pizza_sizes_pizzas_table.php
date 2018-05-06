@@ -14,9 +14,9 @@ class CreatePizzaSizesPizzasTable extends Migration
     public function up()
     {
         Schema::create('pizzas_pizza_sizes', function (Blueprint $table) {
-            $table->integer('pizza-id');
-            $table->integer('pizza-size-id');
-            $table->integer('pizza-size-price');
+            $table->integer('pizza_id');
+            $table->integer('pizza_size_id');
+            $table->integer('pizza_size_price');
         });
     }
 
