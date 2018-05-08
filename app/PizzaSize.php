@@ -12,7 +12,7 @@ class PizzaSize extends Model
 
     public function pizzas()
     {
-        return $this->belongsToMany('App\Pizzas', 'pizzas_pizza_sizes');
+        return $this->belongsToMany('App\Pizza', 'pizzas_pizza_sizes');
     }
 
     public function ingredients()
