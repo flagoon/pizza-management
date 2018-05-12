@@ -42,7 +42,6 @@
                         <!-- Authentication Links -->
                         @guest
                             <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -68,7 +67,29 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            @guest
+                @yield('content')
+            @else
+
+            <div class="container">
+                <div class="row no-gutters">
+                    {{-- Admin menu --}}
+                    <div class="col-2">
+                        <a href="{{ route('home') }}"><div class="menu-item">Dashboard</div></a>
+                        <a href="{{ route('pizzas') }}"><div class="menu-item">Pizzas</div></a>
+                        <a href="{{ route('ingredients') }}"><div class="menu-item">Ingredients</div></a>
+                        <a href="{{ route('extras') }}"><div class="menu-item">Extras</div></a>
+                        <a href="{{ route('categories') }}"><div class="menu-item">Categories</div></a>
+                        <a href="{{ route('contact') }}"><div class="menu-item">Contact Info</div></a>
+                        <a href="{{ route('admin') }}"><div class="menu-item">Change admin</div></a>
+                    </div>
+                    {{-- Admin body --}}
+                    <div class="col-10">
+                        @yield('admin-content')
+                    </div>
+                </div>
+            </div>
+                @endguest
         </main>
     </div>
 </body>
