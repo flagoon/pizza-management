@@ -1,0 +1,16 @@
+.menu-item {
+  background-color: #0b2e13;
+  color: white;
+  width: 100%;
+  padding: 0.2rem;
+  margin-bottom: 0.2rem;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  user-select: none;
+
+  &:hover {
+    background-color: #0c5460;
+    cursor: pointer;
+  }
+}
