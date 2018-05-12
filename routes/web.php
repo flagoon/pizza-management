@@ -15,9 +15,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/pizzas', 'PizzaController@show')->name('pizzas');
+Route::get('/categories', 'PizzaController@showCategories')->name('categories');
+Route::get('/ingredients', 'PizzaController@showIngredients')->name('ingredients');
+Route::get('/extras', 'ExtraController@show')->name('extras');
+Route::get('/admin', 'AdminController@show')->name('admin');
+Route::get('/contact', 'PlaceController@show')->name('contact');
