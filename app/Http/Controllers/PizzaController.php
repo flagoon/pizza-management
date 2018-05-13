@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Ingredient;
 use Illuminate\Http\Request;
 
 class PizzaController extends Controller

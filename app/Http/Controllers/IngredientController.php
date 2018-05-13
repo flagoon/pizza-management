@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\IngredientRequest;
-use App\Ingredient;
+use App\Model\Ingredient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
