@@ -17,12 +17,6 @@ class PizzaController extends Controller
         return view('pizza.pizzas');
     }
 
-    public function showIngredients()
-    {
-        $ingredients = Ingredient::all();
-        return view('ingredient.ingredients', ['ingredients' => $ingredients]);
-    }
-
     public function showCategories()
     {
         return view('category.categories');
