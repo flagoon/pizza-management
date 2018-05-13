@@ -20,7 +20,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="col-12 mt-4">
+                <div class="col-12 mt-4 p-4">
                     <form action="{{ route('add-ingredient') }}" method="POST">
                         @csrf
                         <div class="form-group row">
@@ -28,7 +28,7 @@
                             <input class="form-control col-8" id="ingredient-name" name="ingredient-name" required>
                         </div>
                         <div class="form-group row">
-                            <label for="ingredient-description" class="col-4">Ingredient name:</label>
+                            <label for="ingredient-description" class="col-4">Ingredient description:</label>
                             <textarea class="form-control col-8" id="ingredient-description" name="ingredient-description"></textarea>
                         </div>
                         <div class="form-group row">
