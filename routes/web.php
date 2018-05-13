@@ -25,6 +25,7 @@ Route::get('/pizzas', 'PizzaController@show')->name('pizzas');
 Route::get('/categories', 'PizzaController@showCategories')->name('categories');
 Route::get('/ingredients', 'IngredientController@index')->name('ingredients');
 Route::get('/ingredients/{ingredient}', 'IngredientController@show');
+Route::delete('/ingredients/{ingredient}', 'IngredientController@destroy');
 Route::post('/ingredients', 'IngredientController@create')->name('add-ingredient');
 Route::get('/extras', 'ExtraController@show')->name('extras');
 Route::get('/admin', 'AdminController@show')->name('admin');

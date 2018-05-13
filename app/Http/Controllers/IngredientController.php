@@ -79,8 +79,14 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Ingredient $ingredient)
     {
-        //
+        try {
+            $ingredient->delete();
+        } catch (\Exception $exception) {
+            dd($exception);
+        }
+
+        return redirect('ingredients');
     }
 }
