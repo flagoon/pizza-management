@@ -37,13 +37,17 @@
                     <form action="{{ route('add-ingredient') }}" method="POST">
                         @csrf
                         <div class="form-group row">
-                            <label for="ingredient-name" class="col-4">Ingredient name:</label>
-                            <input class="form-control col-8" id="ingredient-name" name="ingredient-name" required>
+                            <label for="ingredient_name" class="col-4">Ingredient name:</label>
+                            <input class="form-control col-8" id="ingredient_name" name="ingredient_name">
                         </div>
                         <div class="form-group row">
-                            <label for="ingredient-description" class="col-4">Ingredient description:</label>
-                            <textarea class="form-control col-8" id="ingredient-description" name="ingredient-description"></textarea>
+                            <label for="ingredient_description" class="col-4">Ingredient description:</label>
+                            <textarea class="form-control col-8" id="ingredient_description" name="ingredient_description"></textarea>
                         </div>
+                        <div class="form-group">
+                            @include('errors.form-error')
+                        </div>
+
                         <div class="form-group row">
                             <button class="btn btn-primary offset-4" type="submit">
                                 Submit
