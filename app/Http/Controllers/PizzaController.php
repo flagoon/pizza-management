@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Ingredient;
 use Illuminate\Http\Request;
 
 class PizzaController extends Controller
@@ -18,7 +19,8 @@ class PizzaController extends Controller
 
     public function showIngredients()
     {
-        return view('ingredient.ingredients');
+        $ingredients = Ingredient::all();
+        return view('ingredient.ingredients', ['ingredients' => $ingredients]);
     }
 
     public function showCategories()
