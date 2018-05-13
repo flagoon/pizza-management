@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IngredientRequest;
 use App\Ingredient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IngredientController extends Controller
 {
@@ -34,9 +36,13 @@ class IngredientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IngredientRequest $request)
     {
-        //
+        DB::table('ingredients')->insert([
+            'ingredient_name' => $request->ingredient_name,
+            'ingredient_description' => $request->ingredient_description
+        ]);
+        return redirect('ingredients');
     }
 
     /**
