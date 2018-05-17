@@ -17,6 +17,6 @@ class Pizza extends Model
 
     public function pizzaSizes()
     {
-        return $this->belongsTomany('App\PizzaSize', 'pizzas_pizza_size');
+        return $this->belongsTomany('App\PizzaSize', 'pizzas_pizza_size')->withPivot('pizza_size_price');
     }
 }

@@ -40,7 +40,9 @@ class IngredientController extends Controller
     {
         DB::table('ingredients')->insert([
             'ingredient_name' => $request->ingredient_name,
-            'ingredient_description' => $request->ingredient_description
+            'ingredient_description' => $request->ingredient_description,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         return redirect('ingredients');
     }
@@ -53,18 +55,18 @@ class IngredientController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        dd($ingredient->ingredient_name);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  IngredientRequest $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ingredient $ingredient)
     {
-        //
+        return view('ingredient.edit-ingredient', ['ingredient' => $ingredient]);
     }
 
     /**
@@ -74,9 +76,24 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $ingredient)
     {
-        //
+        // can't use custom request, as I don't know how to remove validation for unique value
+        $ingredient->validate(
+            [
+                'ingredient_name' => 'required|min:3'
+            ],
+            [
+                'ingredient_name.required' => 'Name is required!',
+                'ingredient_name.min' => 'At least 3 characters!'
+            ]
+        );
+
+        Ingredient::where('id', $ingredient->id)->update([
+            'ingredient_name' => $ingredient->ingredient_name,
+            'ingredient_description' => $ingredient->ingredient_description
+        ]);
+        return redirect('ingredients');
     }
 
     /**
