@@ -8,16 +8,16 @@
                 @foreach($ingredients as $ingredient)
                 <div class="col-12 row">
 
-                        <div class="mr-auto">
-                            <h2 class="mb-0">{{ $ingredient->ingredient_name }}</h2>
-                        </div>
-                        <div class="col-1">
-                            <a href="/ingredients/{{ $ingredient->id }}">
-                                <button class="btn btn-success">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                            </a>
-                        </div>
+                    <div class="mr-auto">
+                        <h2 class="mb-0">{{ $ingredient->ingredient_name }}</h2>
+                    </div>
+                    <div class="col-1">
+                        <a href="/ingredients/{{ $ingredient->id }}">
+                            <button class="btn btn-success">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </a>
+                    </div>
                     <div class="col-1">
                         <form action="/ingredients/{{ $ingredient->id }}" method="POST">
                             {{ method_field('DELETE') }}
