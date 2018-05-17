@@ -17,6 +17,6 @@ class Ingredient extends Model
 
     public function pizzaSizes()
     {
-        return $this->belongsToMany('App\PizzaSize', 'ingredients_pizza_sizes');
+        return $this->belongsToMany('App\PizzaSize', 'ingredients_pizza_sizes')->withPivot('ingredient_size_price');
     }
 }
