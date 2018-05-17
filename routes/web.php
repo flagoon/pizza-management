@@ -31,3 +31,4 @@ Route::put('/ingredients/{id}', 'IngredientController@update')->name('modify-ing
 Route::get('/extras', 'ExtraController@show')->name('extras');
 Route::get('/admin', 'AdminController@show')->name('admin');
 Route::get('/contact', 'PlaceController@show')->name('contact');
+Route::get('/pizza-sizes', 'PizzaSizeController@index')->name('show-pizza-sizes');
