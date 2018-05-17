@@ -40,7 +40,9 @@ class IngredientController extends Controller
     {
         DB::table('ingredients')->insert([
             'ingredient_name' => $request->ingredient_name,
-            'ingredient_description' => $request->ingredient_description
+            'ingredient_description' => $request->ingredient_description,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         return redirect('ingredients');
     }
@@ -59,12 +61,12 @@ class IngredientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  IngredientRequest $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Ingredient $ingredient)
     {
-        //
+        return view('ingredient.edit-ingredient', ['ingredient' => $ingredient]);
     }
 
     /**

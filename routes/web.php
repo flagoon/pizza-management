@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/pizzas', 'PizzaController@show')->name('pizzas');
 Route::get('/categories', 'PizzaController@showCategories')->name('categories');
 Route::get('/ingredients', 'IngredientController@index')->name('ingredients');
-Route::get('/ingredients/{ingredient}', 'IngredientController@show');
+Route::get('/ingredients/{ingredient}', 'IngredientController@edit')->name('edit-ingredient');
 Route::delete('/ingredients/{ingredient}', 'IngredientController@destroy');
 Route::post('/ingredients', 'IngredientController@store')->name('add-ingredient');
 Route::get('/extras', 'ExtraController@show')->name('extras');
