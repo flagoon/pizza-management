@@ -27,6 +27,7 @@ Route::get('/ingredients', 'IngredientController@index')->name('ingredients');
 Route::get('/ingredients/{ingredient}', 'IngredientController@edit')->name('edit-ingredient');
 Route::delete('/ingredients/{ingredient}', 'IngredientController@destroy');
 Route::post('/ingredients', 'IngredientController@store')->name('add-ingredient');
+Route::put('/ingredients/{id}', 'IngredientController@update')->name('modify-ingredient');
 Route::get('/extras', 'ExtraController@show')->name('extras');
 Route::get('/admin', 'AdminController@show')->name('admin');
 Route::get('/contact', 'PlaceController@show')->name('contact');

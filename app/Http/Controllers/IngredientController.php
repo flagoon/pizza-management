@@ -55,7 +55,7 @@ class IngredientController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        dd($ingredient->ingredient_name);
+        //
     }
 
     /**
@@ -76,9 +76,24 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $ingredient)
     {
-        //
+        // can't use custom request, as I don't know how to remove validation for unique value
+        $ingredient->validate(
+            [
+                'ingredient_name' => 'required|min:3'
+            ],
+            [
+                'ingredient_name.required' => 'Name is required!',
+                'ingredient_name.min' => 'At least 3 characters!'
+            ]
+        );
+
+        Ingredient::where('id', $ingredient->id)->update([
+            'ingredient_name' => $ingredient->ingredient_name,
+            'ingredient_description' => $ingredient->ingredient_description
+        ]);
+        return redirect('ingredients');
     }
 
     /**
