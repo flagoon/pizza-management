@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Pizza;
 use App\Model\PizzaSize;
 use Illuminate\Http\Request;
 
@@ -56,9 +57,11 @@ class PizzaSizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(PizzaSize $pizzaSize)
     {
-        //
+        return view('pizza.edit-pizza-size', [
+            'pizza_size' => $pizzaSize
+        ]);
     }
 
     /**
