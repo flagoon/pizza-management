@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class PizzaSize extends Model
 {
+    // change primary key
+    protected $primaryKey = 'size_name';
+
+    // turn of incrementing
+    public $incrementing = false;
     protected $fillable = [
         'size-name', 'size-value'
     ];

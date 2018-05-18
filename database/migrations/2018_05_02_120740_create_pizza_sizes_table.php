@@ -14,7 +14,6 @@ class CreatePizzaSizesTable extends Migration
     public function up()
     {
         Schema::create('pizza_sizes', function (Blueprint $table) {
-            $table->increments('id');
             $table->string('size_name')->unique();
             $table->integer('size_value');
             $table->timestamps();

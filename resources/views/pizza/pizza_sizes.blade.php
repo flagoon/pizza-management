@@ -6,7 +6,7 @@
             <div class="col-12 row mb-1">
                 <div class="col-3">
 
-                    <a href="/pizza-sizes/{{ $pizza_size->id }}">
+                    <a href="{{ route('edit-pizza-sizes', ['size-name' => $pizza_size->size_name]) }}">
                         <button class="btn btn-default"> {{ $pizza_size->size_name }} {{ $pizza_size->size_value }} cm</button>
                     </a>
                 </div>
