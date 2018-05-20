@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Model\PizzaSize;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PizzaSizeRequest extends FormRequest
@@ -24,37 +23,34 @@ class PizzaSizeRequest extends FormRequest
      */
     public function rules()
     {
-        $pizzaSize = PizzaSize::find($this)[0];
         switch ($this->method()) {
             case 'GET':
             case 'DELETE':
                 return [];
             case 'POST':
                 return [
-                        'size-name' => 'required|min:3|unique:pizza_sizes,size_name',
-                        'size-value' => 'required'
+                        'size_name' => 'required|min:3|unique:pizza_sizes,size_name',
+                        'size_value' => 'required|integer'
                 ];
             case 'PUT':
             case 'PATCH':
                     return [
-                        'size-name' => 'required|min:3|unique:pizza_sizes,size_name,' . $pizzaSize->size_name . ',size_name',
-                        'size-value' => 'required|integer'
+                        'size_name' => 'required|min:3|unique:pizza_sizes,size_name,'.$this->old_name.',size_name',
+                        'size_value' => 'required|integer'
                     ];
             default:
-                return [
-                    'size-name' => 'integer',
-                    'size-value' => 'integer'
-                ];
+                return [];
         }
     }
 
     public function messages()
     {
         return [
-            'size-name.required' => 'Name is required!',
-            'size-name.min' => 'At least 3 characters!',
-            'size-name.unique' => 'Ingredient name should be unique!',
-            'size-value' => 'Value is required!',
+            'size_name.required' => 'Size name is required!',
+            'size_name.min' => 'Size name should have least 3 characters!',
+            'size_name.unique' => 'Size name should be unique!',
+            'size_value.required' => 'Value is required',
+            'size_value.integer' => 'Value has to be an integer'
         ];
     }
 }
