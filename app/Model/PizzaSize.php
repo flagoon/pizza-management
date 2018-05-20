@@ -12,7 +12,7 @@ class PizzaSize extends Model
     // turn of incrementing
     public $incrementing = false;
     protected $fillable = [
-        'size-name', 'size-value'
+        'size_name', 'size_value'
     ];
 
     public function pizzas()
