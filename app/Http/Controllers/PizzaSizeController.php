@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Pizza;
+use App\Http\Requests\PizzaSizeRequest;
 use App\Model\PizzaSize;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PizzaSizeController extends Controller
 {
@@ -46,7 +47,7 @@ class PizzaSizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(PizzaSize $pizzaSize)
     {
         //
     }
@@ -59,8 +60,9 @@ class PizzaSizeController extends Controller
      */
     public function edit(PizzaSize $pizzaSize)
     {
+        // dd($pizzaSize);
         return view('pizza.edit-pizza-size', [
-            'pizza_size' => $pizzaSize
+            'pizzaSize' => $pizzaSize
         ]);
     }
 
@@ -71,9 +73,9 @@ class PizzaSizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PizzaSizeRequest $pizzaSize)
     {
-        //
+        dd($pizzaSize);
     }
 
     /**
