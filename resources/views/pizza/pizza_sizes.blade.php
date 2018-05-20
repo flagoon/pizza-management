@@ -6,12 +6,12 @@
             <div class="col-12 row mb-1">
                 <div class="col-3">
 
-                    <a href="{{ route('edit-pizza-sizes', ['size-name' => $pizza_size->size_name]) }}">
+                    <a href="/pizza-sizes/{{ $pizza_size->size_name }}/edit">
                         <button class="btn btn-default"> {{ $pizza_size->size_name }} {{ $pizza_size->size_value }} cm</button>
                     </a>
                 </div>
                 <div class="col-1">
-                    <form action="/pizza-sizes/{{ $pizza_size->id }}" method="POST">
+                    <form action="/pizza-sizes/{{ $pizza_size->size_name }}" method="POST">
                         {{ method_field('DELETE') }}
                         @csrf
                         <button type="submit" class="btn btn-danger">
