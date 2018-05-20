@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PizzaSizeRequest;
 use App\Model\PizzaSize;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class PizzaSizeController extends Controller
@@ -36,9 +35,15 @@ class PizzaSizeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PizzaSizeRequest $pizzaSize)
     {
-        //
+        DB::table('pizza_sizes')->insert([
+            'size_name' => $pizzaSize->size_name,
+            'size_value' => $pizzaSize->size_value,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        return redirect()->route('pizza-sizes.index');
     }
 
     /**
@@ -60,7 +65,6 @@ class PizzaSizeController extends Controller
      */
     public function edit(PizzaSize $pizzaSize)
     {
-        // dd($pizzaSize);
         return view('pizza.edit-pizza-size', [
             'pizzaSize' => $pizzaSize
         ]);
@@ -75,7 +79,12 @@ class PizzaSizeController extends Controller
      */
     public function update(PizzaSizeRequest $pizzaSize)
     {
-        dd($pizzaSize);
+        PizzaSize::where('size_name', $pizzaSize->size_name)->update([
+                'size_name' => $pizzaSize->size_name,
+                'size_value' => $pizzaSize->size_value
+            ]
+        );
+        return redirect()->route('pizza-sizes.store');
     }
 
     /**
@@ -84,8 +93,14 @@ class PizzaSizeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(PizzaSize $pizzaSize)
     {
-        //
+        try {
+            $pizzaSize->delete();
+        } catch (\Exception $exception) {
+            dd($exception);
+        }
+
+        return redirect()->route('pizza-sizes.index');
     }
 }
