@@ -36,11 +36,11 @@ class IngredientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(IngredientRequest $request)
+    public function store(IngredientRequest $ingredient)
     {
         DB::table('ingredients')->insert([
-            'ingredient_name' => $request->ingredient_name,
-            'ingredient_description' => $request->ingredient_description,
+            'ingredient_name' => $ingredient->ingredient_name,
+            'ingredient_description' => $ingredient->ingredient_description,
             'created_at' => now(),
             'updated_at' => now()
         ]);
