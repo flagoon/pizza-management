@@ -22,5 +22,28 @@
             </div>
 
         @endforeach
+
+        <div class="col-12 mt-4 p-4">
+            <form action="{{ route('pizza-sizes.store') }}" method="POST">
+                @csrf
+                <div class="form-group row">
+                    <label for="size_name" class="col-4">Size name:</label>
+                    <input class="form-control col-8" id="size_name" name="size_name">
+                </div>
+                <div class="form-group row">
+                    <label for="size_value" class="col-4">Size value:</label>
+                    <input class="form-control col-8" id="size_value" name="size_value" type="number"/>
+                </div>
+                <div class="form-group">
+                    @include('errors.form-error')
+                </div>
+
+                <div class="form-group row">
+                    <button class="btn btn-primary offset-4" type="submit">
+                        Submit
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
