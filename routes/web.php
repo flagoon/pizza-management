@@ -35,3 +35,4 @@ Route::get('/contact', 'PlaceController@show')->name('contact');
 // using resource controller
 
 Route::resource('pizza-sizes', 'PizzaSizeController');
+Route::resource('categories', 'CategoryController');
