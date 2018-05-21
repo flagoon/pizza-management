@@ -80,7 +80,7 @@
                         <a href="{{ route('ingredients') }}"><div class="menu-item">Ingredients</div></a>
                         <a href="{{ route('extras') }}"><div class="menu-item">Extras</div></a>
                         <a href="{{ route('pizza-sizes.index') }}"><div class="menu-item">Pizza sizes</div></a>
-                        <a href="{{ route('categories') }}"><div class="menu-item">Categories</div></a>
+                        <a href="{{ route('categories.index') }}"><div class="menu-item">Categories</div></a>
                         <a href="{{ route('contact') }}"><div class="menu-item">Contact Info</div></a>
                         <a href="{{ route('admin') }}"><div class="menu-item">Change admin</div></a>
                     </div>
