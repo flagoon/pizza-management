@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view('category.categories', ['categories' => $categories]);
     }
 
     /**
@@ -57,7 +58,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit', ['category' => $category]);
     }
 
     /**
@@ -80,6 +81,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        dd($category);
     }
 }
