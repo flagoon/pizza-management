@@ -36,3 +36,4 @@ Route::get('/contact', 'PlaceController@show')->name('contact');
 
 Route::resource('pizza-sizes', 'PizzaSizeController');
 Route::resource('categories', 'CategoryController');
+Route::delete('categories/icon/1', 'CategoryController@deleteIcon');

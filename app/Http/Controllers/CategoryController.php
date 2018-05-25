@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Model\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display all categories.
      *
      * @return \Illuminate\Http\Response
      */
@@ -16,16 +17,6 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         return view('category.categories', ['categories' => $categories]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -68,9 +59,9 @@ class CategoryController extends Controller
      * @param  \App\Model\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -82,5 +73,10 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         dd($category);
+    }
+
+    public function deleteIcon(Request $request)
+    {
+        return $request;
     }
 }
