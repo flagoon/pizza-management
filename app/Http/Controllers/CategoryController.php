@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use App\Model\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -20,14 +22,28 @@ class CategoryController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CategoryRequest $category
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $category)
     {
-        //
+        $fileName = null;
+        if ($category->category_icon) {
+            $fileName = Category::prepareTitle($category);
+            Storage::disk('public')->putFileAs('category', $category->category_icon, $fileName);
+        }
+
+        DB::table('categories')->insert([
+            'category_name' => $category->category_name,
+            'category_description' => $category->category_description,
+            'category_icon' => $fileName,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -59,9 +75,9 @@ class CategoryController extends Controller
      * @param  \App\Model\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryRequest $newCategory, Category $category)
     {
-        dd($request);
+        //
     }
 
     /**
@@ -72,7 +88,18 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        dd($category);
+        if ($category->category_icon) {
+            Storage::disk('public')->delete('category/' . $category->category_icon);
+        }
+        try {
+            $category->delete();
+        } catch (\Exception $exception) {
+            return redirect()->route('categories.index')->withErrors([
+                'error.exception' => $exception
+            ]);
+        }
+
+        return redirect()->route('categories.index');
     }
 
     public function deleteIcon(Request $request)
