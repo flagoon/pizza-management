@@ -13677,7 +13677,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(36);
+module.exports = __webpack_require__(37);
 
 
 /***/ }),
@@ -13692,6 +13692,7 @@ module.exports = __webpack_require__(36);
  */
 
 __webpack_require__(12);
+__webpack_require__(36);
 
 /***/ }),
 /* 12 */
@@ -35908,6 +35909,36 @@ module.exports = function spread(callback) {
 
 /***/ }),
 /* 36 */
+/***/ (function(module, exports) {
+
+if (document.getElementById('category-pic')) {
+  var origin = window.location.origin;
+  var picture = document.getElementById('category-pic');
+  var correctPath = picture.getAttribute('src');
+  var badPath = origin + '/storage/category/remove-category-icon.jpg';
+  picture.addEventListener('mouseover', function () {
+    picture.setAttribute('src', badPath);
+  });
+  picture.addEventListener('mouseout', function () {
+    picture.setAttribute('src', correctPath);
+  });
+  picture.addEventListener('click', function () {
+    axios({
+      method: 'delete',
+      params: {
+        id: '1'
+      },
+      url: 'http://localhost/categories/icon/1'
+    }).then(function (resp) {
+      console.log(resp);
+    }).catch(function (error) {
+      console.log(error.message);
+    });
+  });
+}
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
