@@ -25,9 +25,9 @@
                     <label for="category_icon" class="col-4 p-2">Category icon:</label>
                     <div class="col-8 row">
                         @if($category->category_icon)
-                            <img id="category-pic" src="{{ asset('img/category/' . $category->category_icon) }}" class="categories-big"/>
+                            <img id="category-pic" src="{{ asset('storage/category/' . $category->category_icon) }}" class="categories-big"/>
                         @else
-                            <img src="{{ asset('img/no_pic.png') }}" class="categories-big"/>
+                            <img src="{{ asset('storage/no-pic.jpg') }}" class="categories-big"/>
                         @endif
                         <input type="file" class="mt-0">
                     </div>

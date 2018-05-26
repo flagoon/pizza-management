@@ -20,7 +20,7 @@
         @endforeach
     </div>
     <div class="col-12 mt-4">
-        <form action="{{ route('categories.store') }}" method="POST">
+        <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="group-form row">
                 <label for="category_name" class="col-2 mt-2">Category name</label>
@@ -32,8 +32,9 @@
             </div>
             <div class="group-form row mt-2">
                 <label for="category_icon" class="col-2 mt-2">Category icon</label>
-                <input type="file" class="col-6" id="category_icon" name="category_icon">
+                <input type="file" class="col-6" id="category_icon" name="category_icon" multiple>
             </div>
+            @include('errors.form-error')
             <div class="group-form mt-2">
                 <button class="btn btn-primary" type="submit">Submit</button>
             </div>
