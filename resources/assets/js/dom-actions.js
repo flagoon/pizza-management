@@ -1,7 +1,8 @@
 if(document.getElementById('category-pic')) {
+  const origin = window.location.origin;
   const picture = document.getElementById('category-pic');
   const correctPath = picture.getAttribute('src');
-  const badPath = 'http://127.0.0.1:8000/img/category/remove-category-icon.jpg'
+  const badPath = `${origin}/img/category/remove-category-icon.jpg`;
   picture.addEventListener('mouseover', () => {
     picture.setAttribute('src', badPath);
   });
