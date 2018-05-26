@@ -2,7 +2,7 @@ if(document.getElementById('category-pic')) {
   const origin = window.location.origin;
   const picture = document.getElementById('category-pic');
   const correctPath = picture.getAttribute('src');
-  const badPath = `${origin}/img/category/remove-category-icon.jpg`;
+  const badPath = `${origin}/storage/category/remove-category-icon.jpg`;
   picture.addEventListener('mouseover', () => {
     picture.setAttribute('src', badPath);
   });

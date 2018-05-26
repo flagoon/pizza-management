@@ -35915,7 +35915,7 @@ if (document.getElementById('category-pic')) {
   var origin = window.location.origin;
   var picture = document.getElementById('category-pic');
   var correctPath = picture.getAttribute('src');
-  var badPath = origin + '/img/category/remove-category-icon.jpg';
+  var badPath = origin + '/storage/category/remove-category-icon.jpg';
   picture.addEventListener('mouseover', function () {
     picture.setAttribute('src', badPath);
   });
