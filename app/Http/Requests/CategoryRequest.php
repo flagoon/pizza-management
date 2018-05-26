@@ -27,15 +27,15 @@ class CategoryRequest extends FormRequest
             case 'POST':
                 return [
                     'category_name' => 'required|min:3|unique:categories,category_name',
-                    'category_icon' => 'image',
-                    'category_description' => 'min:3'
+                    'category_icon' => 'nullable|image|mimes:jpeg,jpg,png',
+                    'category_description' => 'nullable|min:3'
                 ];
             case 'PUT':
             case 'PATCH':
                 return [
                     'category_name' => 'required|min:3|unique:categories,category_name'.$this->id.'id',
-                    'category_icon' => 'image',
-                    'category_description' => 'min:3'
+                    'category_icon' => 'nullable|image',
+                    'category_description' => 'nullable|min:3'
                 ];
             default:
                 return [];
