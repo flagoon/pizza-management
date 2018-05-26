@@ -29,16 +29,15 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $category)
     {
-        $fileName = null;
+        $path = null;
         if ($category->category_icon) {
-            $fileName = Category::prepareTitle($category);
-            Storage::disk('public')->putFileAs('category', $category->category_icon, $fileName);
+            $path = Storage::disk('public')->putFile('category', $category->category_icon);
         }
 
         DB::table('categories')->insert([
             'category_name' => $category->category_name,
             'category_description' => $category->category_description,
-            'category_icon' => $fileName,
+            'category_icon' => $path,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -47,20 +46,20 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Returns category for User category.
      *
-     * @param  \App\Model\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param  Category  $category
+     * @return Category
      */
     public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Model\Category  $category
+     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
@@ -71,26 +70,40 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Category  $category
+     * @param  Category  $category
+     * @param  CategoryRequest  $newCategory
      * @return \Illuminate\Http\Response
      */
     public function update(CategoryRequest $newCategory, Category $category)
     {
-        //
+        Category::deleteImageIfAvailable($category);
+
+        $path = Category::saveFileIfAvailable($newCategory);
+        if (!$path) {
+            $path = $category->category_icon;
+        }
+
+        $category->update([
+            'category_name' => $newCategory->category_name,
+            'category_icon' => $path,
+            'category_description' => $newCategory->category_description
+        ]);
+
+        return redirect()->route('categories.edit', ['id' => $category->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Model\Category  $category
+     * @param  Category  $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
         if ($category->category_icon) {
-            Storage::disk('public')->delete('category/' . $category->category_icon);
+            Storage::disk('public')->delete($category->category_icon);
         }
+
         try {
             $category->delete();
         } catch (\Exception $exception) {
