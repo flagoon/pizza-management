@@ -3,22 +3,40 @@
     <div class="col-12">
         <h1>Edit the category</h1>
         <div class="col-12">
-            <form action="{{ route('categories.update', ['id' => $category->id]) }}" method="POST">
+            <form class="col-12" action="{{ route('categories.update', ['id' => $category->id]) }}" method="POST">
                 @csrf
-                <div class="group-form row">
-                    <label for="category_name" class="col-2 mt-2">Category name</label>
-                    <input type="text" value="{{ $category->category_name }}" class="form-control col-6" id="category_name" name="category_name">
+                @method('put')
+                <div class="form-group col-12 row">
+                    <label for="category_name" class="col-4 p-2">Category name:</label>
+                    <input type="text"
+                           id="category_name"
+                           name="category_name"
+                           class="form-control col-8"
+                           value="{{ $category->category_name }}">
                 </div>
-                <div class="group-form row mt-2">
-                    <label for="category_description" class="col-2 mt-2">Category description</label>
-                    <textarea class="form-control col-6" id="category_description" name="category_description">{{ $category->category_description }}</textarea>
+
+                <div class="form-group col-12 row">
+                    <label for="category_description" class="col-4 p-2">Category description:</label>
+                    <textarea id="category_description"
+                           name="category_description"
+                              class="form-control col-8">{{ $category->category_description }}</textarea>
                 </div>
-                <div class="group-form row mt-2">
-                    <label for="category_icon" class="col-2 mt-2">Category icon</label>
-                    <input accept=".jpg, .jpeg, .png" type="file" class="col-6" id="category_icon" name="category_icon">
+                <div class="form-group col-12 row">
+                    <label for="category_icon" class="col-4 p-2">Category icon:</label>
+                    <div class="col-8 row">
+                        @if($category->category_icon)
+                            <img id="category-pic" src="{{ asset('img/category/' . $category->category_icon) }}" class="categories-big"/>
+                        @else
+                            <img src="{{ asset('img/no_pic.png') }}" class="categories-big"/>
+                        @endif
+                        <input type="file" class="mt-0">
+                    </div>
                 </div>
-                <div class="group-form mt-2">
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                <div class="form-group">
+                    @include('errors.form-error')
+                </div>
+                <div class="form-group col-12 row">
+                    <button type="submit" class="btn btn-primary col-4 offset-8">Submit</button>
                 </div>
             </form>
         </div>
