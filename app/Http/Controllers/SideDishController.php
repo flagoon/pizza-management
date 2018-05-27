@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\SideDish;
+use App\Model\SideDishType;
 use Illuminate\Http\Request;
 
 class SideDishController extends Controller
@@ -14,7 +15,8 @@ class SideDishController extends Controller
      */
     public function index()
     {
-        //
+        $sideDishes = SideDish::all();
+        return view('sideDish.SideDishList', ['sideDishCollection' => $sideDishes]);
     }
 
     /**
@@ -24,7 +26,8 @@ class SideDishController extends Controller
      */
     public function create()
     {
-        //
+        $dishTypes = SideDishType::all();
+        return view('sideDish.sideDishCreate', compact('dishTypes'));
     }
 
     /**
