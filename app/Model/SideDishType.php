@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class SideDishType extends Model
 {
     protected $fillable = [
-        'side_dish_type'
+        'side_dish_name'
     ];
-    public function SideDishes()
+    public function side_dishes()
     {
-        return $this->belongsTo(SideDish::class);
+        return $this->hasMany(SideDish::class);
     }
 }

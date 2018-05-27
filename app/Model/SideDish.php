@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class SideDish extends Model
 {
-    public function SideDishTypes()
+    public function sideDishType()
     {
-        return $this->hasOne(SideDishType::class);
+        return $this->belongsTo(SideDishType::class);
     }
 }
