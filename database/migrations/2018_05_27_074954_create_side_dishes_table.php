@@ -15,7 +15,7 @@ class CreateSideDishesTable extends Migration
     {
         Schema::create('side_dishes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('type_id');
+            $table->integer('side_dish_type_id');
             $table->string('side_dish_name');
             $table->string('side_dish_volume')->nullable();
             $table->string('side_dish_description');
