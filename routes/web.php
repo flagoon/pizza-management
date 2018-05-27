@@ -28,7 +28,6 @@ Route::get('/ingredients/{ingredient}', 'IngredientController@edit')->name('edit
 Route::delete('/ingredients/{ingredient}', 'IngredientController@destroy');
 Route::post('/ingredients', 'IngredientController@store')->name('add-ingredient');
 Route::put('/ingredients/{id}', 'IngredientController@update')->name('modify-ingredient');
-Route::get('/extras', 'ExtraController@show')->name('extras');
 Route::get('/admin', 'AdminController@show')->name('admin');
 Route::get('/contact', 'PlaceController@show')->name('contact');
 
@@ -36,4 +35,8 @@ Route::get('/contact', 'PlaceController@show')->name('contact');
 
 Route::resource('pizza-sizes', 'PizzaSizeController');
 Route::resource('categories', 'CategoryController');
+Route::resource('side-dish', 'SideDishController');
+Route::resource('side-dish-type', 'SideDishTypeController');
+
+
 Route::delete('categories/icon/1', 'CategoryController@deleteIcon');
