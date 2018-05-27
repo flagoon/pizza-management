@@ -2,51 +2,50 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SideDishTypeRequest;
 use App\Model\SideDishType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SideDishTypeController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the side dish types.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $sideDishTypes = SideDishType::all();
+        return view('sideDish.sideDishTypeList', [
+            'sideDishTypes' => $sideDishTypes
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * Store a newly created side dish type in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SideDishTypeRequest $request)
     {
-        //
+        DB::table('side_dish_types')->insert([
+            'side_dish_type' => $request->side_dish_type
+        ]);
+
+        return redirect()->route('side-dish-type.index');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Model\SideDishType  $sideDishType
-     * @return \Illuminate\Http\Response
+     * @return \App\Model\SideDishType  $sideDishType
      */
     public function show(SideDishType $sideDishType)
     {
-        //
+        return $sideDishType;
     }
 
     /**
@@ -57,7 +56,9 @@ class SideDishTypeController extends Controller
      */
     public function edit(SideDishType $sideDishType)
     {
-        //
+        return view('sideDish.sideDishTypeEdit', [
+            'sideDishType' => $sideDishType
+        ]);
     }
 
     /**
@@ -67,9 +68,10 @@ class SideDishTypeController extends Controller
      * @param  \App\Model\SideDishType  $sideDishType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, SideDishType $sideDishType)
+    public function update(SideDishTypeRequest $request, SideDishType $sideDishType)
     {
-        //
+        $sideDishType->update(['side_dish_type' => $request->side_dish_type]);
+        return redirect()->route('side-dish-type.index');
     }
 
     /**
@@ -80,6 +82,12 @@ class SideDishTypeController extends Controller
      */
     public function destroy(SideDishType $sideDishType)
     {
-        //
+        try {
+            $sideDishType->delete();
+        } catch (\Exception $exception) {
+            return redirect()->route('side-dish-type.index')->withErrors($exception);
+        }
+
+        return redirect()->route('side-dish-type.index');
     }
 }
