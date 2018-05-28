@@ -15,8 +15,7 @@ class SideDishController extends Controller
      */
     public function index()
     {
-        $sideDishes = SideDish::all();
-        return view('sideDish.SideDishList', ['sideDishCollection' => $sideDishes]);
+        return view('sideDish.SideDishList', ['sideDishCollection' => SideDish::all()]);
     }
 
     /**
@@ -26,8 +25,7 @@ class SideDishController extends Controller
      */
     public function create()
     {
-        $dishTypes = SideDishType::all();
-        return view('sideDish.sideDishCreate', compact('dishTypes'));
+        return view('sideDish.sideDishCreate');
     }
 
     /**
@@ -38,7 +36,8 @@ class SideDishController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: use SideDishRequest
+        dd($request);
     }
 
     /**
@@ -49,7 +48,7 @@ class SideDishController extends Controller
      */
     public function show(SideDish $sideDish)
     {
-        //
+        // TODO: decide if I want to use it
     }
 
     /**
@@ -60,7 +59,8 @@ class SideDishController extends Controller
      */
     public function edit(SideDish $sideDish)
     {
-        //
+        // TODO: create view for edit
+        return view('sideDish.sideDishEdit', compact($sideDish));
     }
 
     /**
@@ -72,7 +72,7 @@ class SideDishController extends Controller
      */
     public function update(Request $request, SideDish $sideDish)
     {
-        //
+        // TODO: use SideDishRequest
     }
 
     /**
@@ -83,6 +83,11 @@ class SideDishController extends Controller
      */
     public function destroy(SideDish $sideDish)
     {
-        //
+        try {
+            $sideDish->delete();
+        } catch (\Exception $exception) {
+            return view('sideDish.sideDishEdit', ['errors' => $exception]);
+        }
+        return redirect()->route('side-dish.index');
     }
 }

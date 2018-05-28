@@ -15,18 +15,7 @@ class PizzaSizeController extends Controller
      */
     public function index()
     {
-        $pizza_sizes = PizzaSize::all();
-        return view('pizza.pizza_sizes', ['pizza_sizes' => $pizza_sizes]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('pizza.pizza_sizes', ['pizza_sizes' => PizzaSize::all()]);
     }
 
     /**
@@ -44,17 +33,6 @@ class PizzaSizeController extends Controller
             'updated_at' => now()
         ]);
         return redirect()->route('pizza-sizes.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(PizzaSize $pizzaSize)
-    {
-        //
     }
 
     /**

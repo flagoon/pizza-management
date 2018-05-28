@@ -16,8 +16,7 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        $ingredients = Ingredient::all();
-        return view('ingredient.ingredients', ['ingredients' => $ingredients]);
+        return view('ingredient.ingredients', ['ingredients' => $Ingredient::all()]);
     }
 
     /**
@@ -48,17 +47,6 @@ class IngredientController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Ingredient $ingredient)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  IngredientRequest $ingredient
@@ -78,7 +66,7 @@ class IngredientController extends Controller
      */
     public function update(Request $ingredient)
     {
-        // can't use custom request, as I don't know how to remove validation for unique value
+        // TODO: remade this to use IngredientRequest
         $ingredient->validate(
             [
                 'ingredient_name' => 'required|min:3'

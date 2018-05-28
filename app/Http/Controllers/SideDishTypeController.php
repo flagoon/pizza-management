@@ -16,16 +16,15 @@ class SideDishTypeController extends Controller
      */
     public function index()
     {
-        $sideDishTypes = SideDishType::all();
         return view('sideDish.sideDishTypeList', [
-            'sideDishTypes' => $sideDishTypes
+            'sideDishTypes' => SideDishType::all()
         ]);
     }
 
     /**
      * Store a newly created side dish type in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  SideDishTypeRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(SideDishTypeRequest $request)
@@ -64,8 +63,8 @@ class SideDishTypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\SideDishType  $sideDishType
+     * @param  SideDishTypeRequest  $request
+     * @param  SideDishType  $sideDishType
      * @return \Illuminate\Http\Response
      */
     public function update(SideDishTypeRequest $request, SideDishType $sideDishType)
