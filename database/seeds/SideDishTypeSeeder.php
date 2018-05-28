@@ -12,37 +12,37 @@ class SideDishTypeSeeder extends Seeder
     public function run()
     {
         DB::table('side_dish_types')->insert([
-            'side_dish_name' => 'salad',
+            'side_dish_type_name' => 'salad',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('side_dish_types')->insert([
-            'side_dish_name' => 'drink nonalcoholic',
+            'side_dish_type_name' => 'drink nonalcoholic',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('side_dish_types')->insert([
-            'side_dish_name' => 'drink alcoholic',
+            'side_dish_type_name' => 'drink alcoholic',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('side_dish_types')->insert([
-            'side_dish_name' => 'pasta',
+            'side_dish_type_name' => 'pasta',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('side_dish_types')->insert([
-            'side_dish_name' => 'dessert',
+            'side_dish_type_name' => 'dessert',
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
         DB::table('side_dish_types')->insert([
-            'side_dish_name' => 'other',
+            'side_dish_type_name' => 'other',
             'created_at' => now(),
             'updated_at' => now()
         ]);

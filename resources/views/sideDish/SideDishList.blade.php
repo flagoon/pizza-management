@@ -9,7 +9,7 @@
                 <tr>
                     <td colspan="6">
                         <h3>
-                            {{ $collection[0]->sideDishType->side_dish_name}}
+                            {{ $collection[0]->sideDishType->side_dish_type_name}}
                         </h3>
                     </td>
                 </tr>

@@ -8,7 +8,7 @@
     <div class="col-12">
         @foreach($sideDishTypes as $sideDishType)
             <a href="{{ route('side-dish-type.edit', ['id' => $sideDishType->id]) }}">
-                <button class="btn btn-default">{{ $sideDishType->side_dish_name }}
+                <button class="btn btn-default">{{ $sideDishType->side_dish_type_name }}
                     <form action="{{ route('side-dish-type.destroy', ['id' => $sideDishType->id]) }}" method="POST">
                         @csrf
                         @method('delete')
@@ -24,7 +24,7 @@
             @csrf
             <div class="form-group col-12 row">
                 <label for="type_name" class="col-3 mt-2">Type name:</label>
-                <input type="text" class="form-control col-6" id="type_name" name="side_dish_name">
+                <input type="text" class="form-control col-6" id="type_name" name="side_dish_type_name">
             </div>
             @include('errors.form-error')
             <div class="form-group col-4">
