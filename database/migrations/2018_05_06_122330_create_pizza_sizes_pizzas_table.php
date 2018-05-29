@@ -17,6 +17,7 @@ class CreatePizzaSizesPizzasTable extends Migration
             $table->integer('pizza_id');
             $table->integer('pizza_size_id');
             $table->integer('pizza_size_price');
+            $table->timestamps();
         });
     }
 
