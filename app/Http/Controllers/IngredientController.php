@@ -16,7 +16,7 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        return view('ingredient.ingredients', ['ingredients' => $Ingredient::all()]);
+        return view('ingredient.ingredients', ['ingredients' => Ingredient::all()]);
     }
 
     /**
