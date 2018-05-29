@@ -77,7 +77,7 @@
                     <div class="col-2">
                         <a href="{{ route('home') }}"><div class="menu-item">Dashboard</div></a>
                         <a href="{{ route('pizzas') }}"><div class="menu-item">Pizzas</div></a>
-                        <a href="{{ route('ingredients') }}"><div class="menu-item">Ingredients</div></a>
+                        <a href="{{ route('ingredients.index') }}"><div class="menu-item">Ingredients</div></a>
                         <a href="{{ route('side-dish.index') }}"><div class="menu-item">Side dishes</div></a>
                         <a href="{{ route('side-dish-type.index') }}"><div class="menu-item">Side dish types</div></a>
                         <a href="{{ route('pizza-sizes.index') }}"><div class="menu-item">Pizza sizes</div></a>
