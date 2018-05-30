@@ -97,6 +97,8 @@ class PizzaSizeController extends Controller
             return view('pizza-size.pizza-sizeList', [ 'errors' => $exception ]);
         }
 
+        // TODO: deleting pizza size, should remove all connection to ingredients
+
         return redirect()->route('pizza-sizes.index');
     }
 }
