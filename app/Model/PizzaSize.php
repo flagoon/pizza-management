@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class PizzaSize extends Model
 {
+    protected $fillable = [
+        'size_name', 'size_value'
+    ];
+
     public function pizzas()
     {
         return $this->belongsToMany(Pizza::class, 'pizzas_pizza_sizes')->withPivot('pizza_size_price');
