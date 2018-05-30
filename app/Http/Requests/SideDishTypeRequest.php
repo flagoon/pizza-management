@@ -26,12 +26,12 @@ class SideDishTypeRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'side_dish_type' => 'required|unique:side_dish_types,side_dish_type|min:3'
+                    'side_dish_type' => 'required|unique:side_dish_types,side_dish_name|min:3'
                 ];
             case 'PUT':
             case 'PATCH':
                 return [
-                    'side_dish_type' => 'required|unique:side_dish_types,side_dish_type'.$this->id.'id|min:3'
+                    'side_dish_type' => 'required|unique:side_dish_types,side_dish_name'.$this->id.'id|min:3'
                 ];
             default:
                 return [];
