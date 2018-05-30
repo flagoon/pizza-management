@@ -7,7 +7,6 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th class="text-center">Id</th>
                     <th class="text-center">Pizza size</th>
                     <th class="text-center">Width</th>
                     <th class="text-center">Edit</th>
@@ -15,9 +14,8 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($pizzaSizes as $pizzaSize)
+            @foreach($pizzaSizes->sortBy('size_value') as $pizzaSize)
                 <tr>
-                    <td class="text-center" style="width: 1rem">{{ $pizzaSize->id }}</td>
                     <td class="text-center">{{ $pizzaSize->size_name }}</td>
                     <td class="text-center">{{ $pizzaSize->size_value }}</td>
                     <td class="text-center" style="width: 1rem">
