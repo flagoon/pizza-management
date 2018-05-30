@@ -13,49 +13,65 @@ class IngredinetPizzaSizeSeeder extends Seeder
     {
         DB::table('ingredients_pizza_sizes')->insert([
             'ingredient_id' => 1,
-            'pizza_size_size_name' => 'small',
-            'ingredient_size_price' => 10
+            'pizza_size_id' => 1,
+            'ingredient_size_price' => 10,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('ingredients_pizza_sizes')->insert([
             'ingredient_id' => 1,
-            'pizza_size_size_name' => 'medium',
-            'ingredient_size_price' => 15
+            'pizza_size_id' => 2,
+            'ingredient_size_price' => 15,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('ingredients_pizza_sizes')->insert([
             'ingredient_id' => 1,
-            'pizza_size_size_name' => 'large',
-            'ingredient_size_price' => 20
+            'pizza_size_id' => 3,
+            'ingredient_size_price' => 20,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('ingredients_pizza_sizes')->insert([
             'ingredient_id' => 1,
-            'pizza_size_size_name' => 'gigant',
-            'ingredient_size_price' => 25
+            'pizza_size_id' => 4,
+            'ingredient_size_price' => 25,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         DB::table('ingredients_pizza_sizes')->insert([
             'ingredient_id' => 2,
-            'pizza_size_size_name' => 'small',
-            'ingredient_size_price' => 10
-        ]);
-
-        DB::table('ingredients_pizza_sizes')->insert([
-            'ingredient_id' => 2,
-            'pizza_size_size_name' => 'medium',
-            'ingredient_size_price' => 15
+            'pizza_size_id' => 1,
+            'ingredient_size_price' => 10,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('ingredients_pizza_sizes')->insert([
             'ingredient_id' => 2,
-            'pizza_size_size_name' => 'large',
-            'ingredient_size_price' => 20
+            'pizza_size_id' => 2,
+            'ingredient_size_price' => 15,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         DB::table('ingredients_pizza_sizes')->insert([
             'ingredient_id' => 2,
-            'pizza_size_size_name' => 'gigant',
-            'ingredient_size_price' => 25
+            'pizza_size_id' => 3,
+            'ingredient_size_price' => 20,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('ingredients_pizza_sizes')->insert([
+            'ingredient_id' => 2,
+            'pizza_size_id' => 4,
+            'ingredient_size_price' => 25,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
     }
 }
