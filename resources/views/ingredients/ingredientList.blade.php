@@ -10,8 +10,8 @@
                         <th rowspan="2">Ingredient name</th>
                         <th rowspan="2">Ingredient description</th>
                         <th colspan="{{ $sizes->count() }}">Prices</th>
-                        <th rowspan="2"></th>
-                        <th rowspan="2"></th>
+                        <th rowspan="2" style="transform: rotate(90deg)">edit</th>
+                        <th rowspan="2" style="transform: rotate(90deg)">delete</th>
                     </tr>
                     <tr>
                         @foreach($sizes as $size)
