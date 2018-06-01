@@ -21,7 +21,7 @@
                     <td class="text-center" style="width: 1rem">
                         <a href="{{ route('pizza-sizes.edit', [ 'id' => $pizzaSize->id ]) }}">
                             <button class="btn btn-success">
-                                <i class="fa fa-trash"></i>
+                                <i class="fa fa-pencil"></i>
                             </button>
                         </a>
                     </td>
