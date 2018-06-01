@@ -41,6 +41,8 @@ class PizzaSizeController extends Controller
             'size_value' => $request->size_value
         ]);
 
+        // TODO: modify ingredients_pizza_sizes table to add new column to all ingredients as a place holder for ingredient price.
+
         return redirect()->route('pizza-sizes.index');
     }
 
