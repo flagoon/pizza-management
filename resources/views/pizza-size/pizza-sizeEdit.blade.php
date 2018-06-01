@@ -5,6 +5,8 @@
         <form action="{{ route('pizza-sizes.update', [ 'id' => $pizzaSize->id ]) }}" method="POST" class="col-12 row">
             @csrf
             @method('PUT')
+            {{-- Id needs to be part of request so update could pass unique rule. --}}
+            <input type="hidden" value="{{ $pizzaSize->id }}" name="id">
             <div class="col-6 row">
                 <div class="form-group col-12 row">
                     <label for="size_name" class="col-12">Size name:</label>

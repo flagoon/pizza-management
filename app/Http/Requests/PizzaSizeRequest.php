@@ -35,7 +35,7 @@ class PizzaSizeRequest extends FormRequest
             case 'PUT':
             case 'PATCH':
                     return [
-                        'size_name' => 'required|min:3|unique:pizza_sizes,size_name,'.$this->old_name.',size_name',
+                        'size_name' => 'required|min:3|unique:pizza_sizes,size_name,' . $this->id,
                         'size_value' => 'required|integer'
                     ];
             default:
@@ -49,8 +49,8 @@ class PizzaSizeRequest extends FormRequest
             'size_name.required' => 'Size name is required!',
             'size_name.min' => 'Size name should have least 3 characters!',
             'size_name.unique' => 'Size name should be unique!',
-            'size_value.required' => 'Value is required',
-            'size_value.integer' => 'Value has to be an integer'
+            'size_value.required' => 'Value is required!',
+            'size_value.integer' => 'Value has to be an integer!'
         ];
     }
 }
