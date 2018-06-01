@@ -3,19 +3,21 @@
 @section('admin-content')
 
     <div class="col-12">
-        <h2>Ingredients list</h2>
-            <table class="table table-bordered">
+        <a href="{{ route('ingredients.create') }}">
+            <button class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Add new</button>
+        </a>
+            <table class="table">
                 <thead>
                     <tr>
                         <th rowspan="2">Ingredient name</th>
                         <th rowspan="2">Ingredient description</th>
                         <th colspan="{{ $sizes->count() }}">Prices</th>
-                        <th rowspan="2" style="transform: rotate(90deg)">edit</th>
-                        <th rowspan="2" style="transform: rotate(90deg)">delete</th>
+                        <th rowspan="2"></th>
+                        <th rowspan="2"></th>
                     </tr>
                     <tr>
                         @foreach($sizes as $size)
-                            <th>{{ $size->size_name }}</th>
+                            <th class="text-center">{{ $size->size_name }}</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -24,12 +26,28 @@
                         <tr>
                             <td>{{ $ingredient->ingredient_name }}</td>
                             <td>{{ $ingredient->ingredient_description }}</td>
-                            {{-- TODO: show empty fields --}}
                             @foreach($ingredient->pizzaSizes as $pizzaSize)
-                            <td>
-                                {{ $pizzaSize->pivot->ingredient_size_price or '=' }}
+                            <td class="text-center">
+                                {{ $pizzaSize->pivot->ingredient_size_price }}
                             </td>
                             @endforeach
+                            <td class="p-0">
+                                <a href="{{ route('ingredients.edit', [ 'id' => $ingredient->id ]) }}">
+                                    <button class="btn btn-success w-100 mt-1">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                </a>
+                            </td>
+                            <td class="p-0">
+                                <form action="{{ route('ingredients.destroy', [ 'id' => $ingredient->id ]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger w-100 mt-1">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+
                         </tr>
                     @endforeach
                 </tbody>
