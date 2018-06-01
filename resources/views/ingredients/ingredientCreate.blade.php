@@ -1,7 +1,6 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: flagoon
- * Date: 01.06.18
- * Time: 23:32
- */
+@extends('layouts.app')
+@section('admin-content')
+    <div class="col-12">
+        <h1>Create new ingredients</h1>
+    </div>
+@endsection
