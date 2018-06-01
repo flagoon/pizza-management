@@ -26,11 +26,11 @@
                         <tr>
                             <td>{{ $ingredient->ingredient_name }}</td>
                             <td>{{ $ingredient->ingredient_description }}</td>
-                            @foreach($ingredient->pizzaSizes as $pizzaSize)
-                            <td class="text-center">
-                                {{ $pizzaSize->pivot->ingredient_size_price }}
-                            </td>
-                            @endforeach
+                                @foreach($ingredient->pizzaSizes as $pizzaSize)
+                                    <td class="text-center">
+                                        {{ $pizzaSize->pivot->ingredient_size_price }}
+                                    </td>
+                                @endforeach
                             <td class="p-0">
                                 <a href="{{ route('ingredients.edit', [ 'id' => $ingredient->id ]) }}">
                                     <button class="btn btn-success w-100 mt-1">
