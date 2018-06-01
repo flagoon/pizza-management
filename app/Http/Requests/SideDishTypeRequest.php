@@ -23,6 +23,7 @@ class SideDishTypeRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this->id);
         switch ($this->method()) {
             case 'POST':
                 return [
@@ -31,6 +32,7 @@ class SideDishTypeRequest extends FormRequest
             case 'PUT':
             case 'PATCH':
                 return [
+                    // TODO: I should have sent hidden input with ID
                     'side_dish_type' => 'required|unique:side_dish_types,side_dish_name'.$this->id.'id|min:3'
                 ];
             default:
