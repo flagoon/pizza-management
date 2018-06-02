@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IngredientRequest;
 use App\Model\Ingredient;
 use App\Model\PizzaSize;
-use Illuminate\Http\Request;
 
 class IngredientController extends Controller
 {
@@ -28,29 +28,42 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        return view('ingredients.ingredientCreate');
+        $pizzaSizes = PizzaSize::all();
+        return view('ingredients.ingredientCreate', [ 'pizzaSizes' => $pizzaSizes ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created ingredient in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IngredientRequest $request)
     {
-        // TODO: change to IngredientRequest
+        $ingredientPrices = $request->except([
+            '_token', 'ingredient_name', 'ingredient_description'
+        ]);
+        $ingredient = new Ingredient();
+        $ingredient->ingredient_name = $request->ingredient_name;
+        $ingredient->ingredient_description = $request->ingredient_description;
+        $ingredient->save();
+        foreach($ingredientPrices as $ingredientPrice => $key) {
+            $ingredientPriceId = str_replace('size_', '', $ingredientPrice);
+            $ingredient->pizzaSizes()->attach($ingredientPriceId, [ 'ingredient_size_price' => $ingredientPrices[$ingredientPrice]]);
+        }
+
+        return redirect()->route('ingredients.index');
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified ingredient.
      *
      * @param  \App\Model\Ingredient  $ingredient
      * @return \App\Model\Ingredient  $ingredient
      */
     public function show(Ingredient $ingredient)
     {
-        return $ingredient;
+        return $ingredient->pizzaSizes;
     }
 
     /**
@@ -65,13 +78,13 @@ class IngredientController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified ingredient in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Model\Ingredient  $ingredient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ingredient $ingredient)
+    public function update(IngredientRequest $request, Ingredient $ingredient)
     {
         // TODO: Change to IngredientRequest
     }
@@ -84,6 +97,15 @@ class IngredientController extends Controller
      */
     public function destroy(Ingredient $ingredient)
     {
-        // TODO: destroying ingredient should destroy all instances in Pivot.
+        $ingredient->pizzaSizes()->detach();
+
+        try {
+           $ingredient->delete();
+        } catch(\Exception $exception) {
+            return view('ingredients.ingredientList')
+                ->withErrors(['errors.delete' => 'Something went wrong!']);
+        }
+
+        return redirect()->route('ingredients.index');
     }
 }
