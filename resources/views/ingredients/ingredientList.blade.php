@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($ingredients as $ingredient)
+                    @foreach($ingredients->sortBy('ingredient_name') as $ingredient)
                         <tr>
                             <td>{{ $ingredient->ingredient_name }}</td>
                             <td>{{ $ingredient->ingredient_description }}</td>
