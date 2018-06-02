@@ -21,8 +21,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/pizzas', 'PizzaController@show')->name('pizzas');
-Route::get('/categories', 'PizzaController@showCategories')->name('categories');
 Route::get('/admin', 'AdminController@show')->name('admin');
 Route::get('/contact', 'PlaceController@show')->name('contact');
 
@@ -33,6 +31,7 @@ Route::resource('categories', 'CategoryController');
 Route::resource('side-dish', 'SideDishController');
 Route::resource('side-dish-type', 'SideDishTypeController');
 Route::resource('ingredients', 'IngredientController');
+Route::resource('pizza', 'PizzaController');
 
 
 Route::delete('categories/icon/1', 'CategoryController@deleteIcon');
