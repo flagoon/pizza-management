@@ -74,7 +74,10 @@ class IngredientController extends Controller
      */
     public function edit(Ingredient $ingredient)
     {
-        return view('ingredients.ingredientEdit', [ 'ingredient' => $ingredient ]);
+        return view('ingredients.ingredientEdit', [
+            'ingredient' => $ingredient,
+            'pizzaSizes' => PizzaSize::all()
+        ]);
     }
 
     /**
