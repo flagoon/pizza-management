@@ -49,7 +49,11 @@ class IngredientController extends Controller
         $ingredient->save();
         foreach($ingredientPrices as $ingredientPrice => $key) {
             $ingredientPriceId = str_replace('size_', '', $ingredientPrice);
-            $ingredient->pizzaSizes()->attach($ingredientPriceId, [ 'ingredient_size_price' => $ingredientPrices[$ingredientPrice]]);
+            $ingredient
+                ->pizzaSizes()
+                ->attach($ingredientPriceId, [
+                    'ingredient_size_price' => $ingredientPrices[$ingredientPrice]
+                ]);
         }
 
         return redirect()->route('ingredients.index');
