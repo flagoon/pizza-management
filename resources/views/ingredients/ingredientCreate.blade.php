@@ -10,7 +10,7 @@
             </div>
             <div class="row form-group col-12">
                 <label for="ingredient_description" class="col-3 mt-2">Ingredient description</label>
-                <input type="text" id="ingredient_description" name="ingredient_description" class="col-8 form-control">
+                <textarea id="ingredient_description" name="ingredient_description" class="col-8 form-control"></textarea>
             </div>
             <div class="row form-group col-12">
                 <h3>Prices for sizes</h3>
