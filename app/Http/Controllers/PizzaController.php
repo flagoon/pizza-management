@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PizzaRequest;
 use App\Model\Pizza;
+use App\Model\PizzaSize;
 
 class PizzaController extends Controller
 {
@@ -14,7 +15,11 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        //
+        return view('pizza.pizzaList', [
+            'pizzas' => Pizza::all(),
+            // TODO: it can be removed using relation pizzas_pizza_sizes
+            'pizzaSizes' => PizzaSize::all()
+        ]);
     }
 
     /**
