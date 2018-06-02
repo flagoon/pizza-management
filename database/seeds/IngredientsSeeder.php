@@ -45,5 +45,19 @@ class IngredientsSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+
+        DB::table('ingredients')->insert([
+            'ingredient_name' => 'dough',
+            'ingredient_description' => 'glutenowe',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('ingredients')->insert([
+            'ingredient_name' => 'tomato sauce',
+            'ingredient_description' => 'specjalny sos kuchcika',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }
