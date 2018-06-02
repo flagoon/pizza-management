@@ -2,22 +2,84 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\PizzaRequest;
+use App\Model\Pizza;
 
 class PizzaController extends Controller
 {
-    public function __construct()
+    /**
+     * Display a listing of the pizza.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        $this->middleware('auth');
+        //
     }
 
-    public function show()
+    /**
+     * Show the form for creating a new pizza.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        return view('pizza.pizzas');
+        //
     }
 
-    public function showCategories()
+    /**
+     * Store a newly created pizza in storage.
+     *
+     * @param  \App\Http\Requests\PizzaRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(PizzaRequest $request)
     {
-        return view('category.categories');
+        //
+    }
+
+    /**
+     * Display the specified pizza.
+     *
+     * @param  \App\Model\Pizza  $pizza
+     * @return Pizza $pizza
+     */
+    public function show(Pizza $pizza)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified pizza.
+     *
+     * @param  \App\Model\Pizza  $pizza
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Pizza $pizza)
+    {
+        //
+    }
+
+    /**
+     * Update the specified pizza in storage.
+     *
+     * @param  \App\Http\Requests\PizzaRequest  $request
+     * @param  \App\Model\Pizza  $pizza
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PizzaRequest $request, Pizza $pizza)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified pizza from storage.
+     *
+     * @param  \App\Model\Pizza  $pizza
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Pizza $pizza)
+    {
+        //
     }
 }
