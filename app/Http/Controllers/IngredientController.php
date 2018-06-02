@@ -89,7 +89,21 @@ class IngredientController extends Controller
      */
     public function update(IngredientRequest $request, Ingredient $ingredient)
     {
-        // TODO: Change to IngredientRequest
+        $pizzaSizePrices = $request->except([
+            '_token', '_method', 'ingredient_name', 'ingredient_description', 'id'
+        ]);
+
+        $ingredient->update([
+            'ingredient_name' => $request->ingredient_name,
+            'ingredient_description' => $request->ingredient_description
+        ]);
+
+        foreach($pizzaSizePrices as $key => $pizzaSizePrice) {
+            $pizzaSizeKey = str_replace('size_', '', $key);
+            $ingredient->pizzaSizes()->syncWithoutDetaching([$pizzaSizeKey=>['ingredient_size_price' => $pizzaSizePrice]]);
+        }
+
+        return redirect()->route('ingredients.index');
     }
 
     /**
