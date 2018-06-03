@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('admin-content')
-
+    @include('success.show')
     <div class="col-12">
         <a href="{{ route('ingredients.create') }}">
             <button class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Add new</button>
