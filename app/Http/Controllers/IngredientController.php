@@ -28,8 +28,7 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        $pizzaSizes = PizzaSize::all();
-        return view('ingredients.ingredientCreate', [ 'pizzaSizes' => $pizzaSizes ]);
+        return view('ingredients.ingredientCreate', [ 'pizzaSizes' => PizzaSize::all() ]);
     }
 
     /**
@@ -47,16 +46,27 @@ class IngredientController extends Controller
         $ingredient->ingredient_name = $request->ingredient_name;
         $ingredient->ingredient_description = $request->ingredient_description;
         $ingredient->save();
-        foreach($ingredientPrices as $ingredientPrice => $key) {
-            $ingredientPriceId = str_replace('size_', '', $ingredientPrice);
+
+        /**
+         * This loop is inserting data to pivot table with prices.
+         * Field name can't be a number, so we are using SIZE_PREFIX in blade
+         * files and then remove it here.
+         *
+         * @var integer $ingredientPrice
+         * @var string $key
+         */
+        foreach ($ingredientPrices as $key => $ingredientPrice) {
+            $ingredientPriceId = str_replace('size_', '', $key);
             $ingredient
                 ->pizzaSizes()
                 ->attach($ingredientPriceId, [
-                    'ingredient_size_price' => $ingredientPrices[$ingredientPrice]
+                    'ingredient_size_price' =>$ingredientPrice
                 ]);
         }
 
-        return redirect()->route('ingredients.index');
+        return redirect()
+            ->route('ingredients.index')
+            ->with('success', 'Ingredient was created correctly.');
     }
 
     /**
@@ -102,12 +112,24 @@ class IngredientController extends Controller
             'ingredient_description' => $request->ingredient_description
         ]);
 
-        foreach($pizzaSizePrices as $key => $pizzaSizePrice) {
+        /**
+         * When modifying ingredient, it's new prices should change in pivot
+         *
+         * @var string $key
+         * @var integer $pizzaSizePrice
+         */
+        foreach ($pizzaSizePrices as $key => $pizzaSizePrice) {
             $pizzaSizeKey = str_replace('size_', '', $key);
-            $ingredient->pizzaSizes()->syncWithoutDetaching([$pizzaSizeKey=>['ingredient_size_price' => $pizzaSizePrice]]);
+            $ingredient
+                ->pizzaSizes()
+                ->syncWithoutDetaching([
+                    $pizzaSizeKey => ['ingredient_size_price' => $pizzaSizePrice]
+                ]);
         }
 
-        return redirect()->route('ingredients.index');
+        return redirect()
+            ->route('ingredients.index')
+            ->with('success', 'Ingredient was updated correctly.');
     }
 
     /**
@@ -121,12 +143,14 @@ class IngredientController extends Controller
         $ingredient->pizzaSizes()->detach();
 
         try {
-           $ingredient->delete();
-        } catch(\Exception $exception) {
+            $ingredient->delete();
+        } catch (\Exception $exception) {
             return view('ingredients.ingredientList')
                 ->withErrors(['errors.delete' => 'Something went wrong!']);
         }
 
-        return redirect()->route('ingredients.index');
+        return redirect()
+            ->route('ingredients.index')
+            ->with('success', 'Ingredient was deleted correctly.');
     }
 }
