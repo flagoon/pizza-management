@@ -29,6 +29,7 @@ class CategoryController extends Controller
     public function store(CategoryRequest $category)
     {
         $path = null;
+
         if ($category->category_icon) {
             $path = Storage::disk('public')->putFile('category', $category->category_icon);
         }
@@ -36,9 +37,7 @@ class CategoryController extends Controller
         DB::table('categories')->insert([
             'category_name' => $category->category_name,
             'category_description' => $category->category_description,
-            'category_icon' => $path,
-            'created_at' => now(),
-            'updated_at' => now()
+            'category_icon' => $path
         ]);
 
         return redirect()->route('categories.index');
@@ -78,6 +77,7 @@ class CategoryController extends Controller
         Category::deleteImageIfAvailable($category);
 
         $path = Category::saveFileIfAvailable($newCategory);
+
         if (!$path) {
             $path = $category->category_icon;
         }
