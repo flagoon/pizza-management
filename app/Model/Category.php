@@ -13,17 +13,10 @@ class Category extends Model
         'category_name', 'category_icon', 'category_description'
     ];
 
-    /**
-     * It creates name for file.
-     *
-     * @param CategoryRequest $category
-     * @return string
-     */
-    public static function prepareTitle(CategoryRequest $category): string
+    // Builds relation with pizza model.
+    public function pizzas()
     {
-        $fileName = str_replace(' ', '-', $category->category_name);
-        $fileName .= '.' . $category->category_icon->getClientOriginalExtension();
-        return $fileName;
+        return $this->hasMany(Pizza::class);
     }
 
     /**
