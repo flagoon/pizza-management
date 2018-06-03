@@ -17,4 +17,10 @@ class Pizza extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    // Builds relation with pizza size model
+    public function pizzaSizes()
+    {
+        return $this->belongsToMany(PizzaSize::class, 'pizzas_pizza_sizes')->withPivot('pizza_size_price');
+    }
 }
