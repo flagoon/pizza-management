@@ -18,6 +18,7 @@ class CreatePizzasTable extends Migration
             $table->string('pizza_name')->unique();
             $table->string('pizza_description');
             $table->enum('pizza_spiciness', [0, 1, 2, 3]);
+            $table->integer('category_id');
             $table->timestamps();
         });
     }

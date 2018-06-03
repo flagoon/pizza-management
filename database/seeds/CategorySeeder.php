@@ -12,8 +12,7 @@ class CategorySeeder extends Seeder
     public function run()
     {
         DB::table('categories')->insert([
-            'category_name' => 'with chicken',
-            'category_icon' => 'chicken.jpg',
+            'category_name' => 'other',
             'category_description' => 'pizza with chicken',
             'created_at' => now(),
             'updated_at' => now()
