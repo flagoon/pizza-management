@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PizzaRequest;
+use App\Model\Category;
+use App\Model\Ingredient;
 use App\Model\Pizza;
 use App\Model\PizzaSize;
 
@@ -16,9 +18,7 @@ class PizzaController extends Controller
     public function index()
     {
         return view('pizza.pizzaList', [
-            'pizzas' => Pizza::all(),
-            // TODO: it can be removed using relation pizzas_pizza_sizes
-            'pizzaSizes' => PizzaSize::all()
+            'pizzas' => Pizza::all()
         ]);
     }
 
@@ -29,7 +29,11 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        //
+        return view('pizza.pizzaCreate', [
+            'pizzaSizes' => PizzaSize::all(),
+            'ingredients' => Ingredient::all(),
+            'categories' => Category::all()
+        ]);
     }
 
     /**
@@ -40,7 +44,33 @@ class PizzaController extends Controller
      */
     public function store(PizzaRequest $request)
     {
-        //
+        $ingredients = $request->all()['ingredients'];
+        $prices = $request->all()['pizza_price'];
+
+        $pizza = new Pizza();
+        $pizza->pizza_name = $request->pizza_name;
+        $pizza->pizza_description = $request->pizza_description;
+        $pizza->pizza_spiciness = $request->pizza_spiciness;
+        $pizza->category_id = $request->pizza_category;
+        $pizza->save();
+
+        foreach($ingredients as $ingredient) {
+            $pizza
+                ->ingredients()
+                ->attach($ingredient);
+        }
+
+        foreach($prices as $key => $price) {
+            $pizza
+                ->pizzaSizes()
+                ->attach($key, [
+                    'pizza_size_price' => $price
+                ]);
+        }
+
+        return redirect()
+            ->route('pizza.index')
+            ->with('success', 'New pizza added in ' . $pizza->category->category_name . ' category.');
     }
 
     /**
@@ -85,6 +115,18 @@ class PizzaController extends Controller
      */
     public function destroy(Pizza $pizza)
     {
-        //
+        $pizza->ingredients()->detach();
+        $pizza->pizzaSizes()->detach();
+
+        try {
+            $pizza->delete();
+        } catch (\Exception $exception) {
+            return view('ingredients.ingredientList')
+                ->withErrors(['errors.delete' => 'Something went wrong!']);
+        }
+
+        return redirect()
+            ->route('pizza.index')
+            ->with('success', 'Pizza was deleted correctly.');
     }
 }
