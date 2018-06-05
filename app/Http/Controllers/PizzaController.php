@@ -93,6 +93,11 @@ class PizzaController extends Controller
     public function edit(Pizza $pizza)
     {
         //
+        return view('pizza.pizzaEdit', [
+            'pizza' => $pizza,
+            'ingredients' => Ingredient::all(),
+            'categories' => Category::all()
+            ]);
     }
 
     /**
