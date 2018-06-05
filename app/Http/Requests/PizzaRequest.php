@@ -24,17 +24,28 @@ class PizzaRequest extends FormRequest
      */
     public function rules()
     {
-
         $categoryMaxId = Category::all()->max()->id;
+
         $rules = [
-            'pizza_name' => 'required|min:3|unique:pizzas,pizza_name',
             'pizza_description' => 'nullable|min:3',
             'pizza_spiciness' => 'required|min:0|max:3',
             'pizza_category' => 'required|min:1|max:' . $categoryMaxId,
             'ingredients.*' => 'required',
             'pizza_price.*' => 'required|integer'
         ];
-        // TODO: Validation for update should exclude uniqueness.
+
+        switch ($this->method()) {
+            case 'POST':
+                $rules += [ 'pizza_name' => 'required|min:3|unique:pizzas,pizza_name' ];
+                break;
+            case 'PUT':
+            case 'PATCH':
+                $rules += [ 'pizza_name' => 'required|min:3|unique:pizzas,pizza_name,' . $this->id ];
+                break;
+            default:
+                return [];
+        }
+
         return $rules;
     }
 
