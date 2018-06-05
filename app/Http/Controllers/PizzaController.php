@@ -44,9 +44,6 @@ class PizzaController extends Controller
      */
     public function store(PizzaRequest $request)
     {
-        $ingredients = $request->all()['ingredients'];
-        $prices = $request->all()['pizza_price'];
-
         $pizza = new Pizza();
         $pizza->pizza_name = $request->pizza_name;
         $pizza->pizza_description = $request->pizza_description;
@@ -54,13 +51,20 @@ class PizzaController extends Controller
         $pizza->category_id = $request->pizza_category;
         $pizza->save();
 
-        foreach($ingredients as $ingredient) {
-            $pizza
-                ->ingredients()
-                ->attach($ingredient);
-        }
+        /**
+         * sending table to attach relation to pivot.
+         */
+        $pizza
+            ->ingredients()
+            ->attach($request->all()['ingredients']);
 
-        foreach($prices as $key => $price) {
+        /**
+         * Sening prices to pivot. There is a price in pivot tablel, so we need to attach value to proper key.
+         *
+         * @var int $key
+         * @var number $price
+         */
+        foreach ($request->all()['pizza_price'] as $key => $price) {
             $pizza
                 ->pizzaSizes()
                 ->attach($key, [
@@ -92,7 +96,6 @@ class PizzaController extends Controller
      */
     public function edit(Pizza $pizza)
     {
-        //
         return view('pizza.pizzaEdit', [
             'pizza' => $pizza,
             'ingredients' => Ingredient::all(),
