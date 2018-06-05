@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Pizza extends Model
 {
 
+    protected $fillable = ['pizza_name', 'pizza_description', 'pizza_spiciness', 'category_id'];
+
     /**
      * Builds relation with Ingredient model
      *
