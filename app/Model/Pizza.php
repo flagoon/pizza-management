@@ -40,4 +40,21 @@ class Pizza extends Model
     {
         return $this->belongsToMany(PizzaSize::class, 'pizzas_pizza_sizes')->withPivot('pizza_size_price');
     }
+
+    /**
+     * This function checks if ingredient belongs to pizza and check it in view (pizzaEdit.blade.php).
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function checkCorrectIngredients(int $id): bool
+    {
+        foreach($this->ingredients as $ingredient) {
+            if($ingredient->id === $id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
