@@ -25,7 +25,7 @@ class IngredientRequest extends FormRequest
     public function rules()
     {
         $rules = ['ingredient_description' => 'nullable|min:3'];
-        foreach(PizzaSize::all() as $pizzaSize) {
+        foreach (PizzaSize::all() as $pizzaSize) {
             $rules += ['size_' . $pizzaSize->id => 'regex:/^\d*(\.\d{1,2})?$/|required'];
         }
         switch ($this->method()) {
@@ -34,11 +34,12 @@ class IngredientRequest extends FormRequest
                 break;
             case 'PUT':
             case 'PATCH':
-            $rules += ['ingredient_name' => 'required|min:3|unique:ingredients,ingredient_name,' . $this->id];
+                $rules += ['ingredient_name' => 'required|min:3|unique:ingredients,ingredient_name,' . $this->id];
                 break;
             default:
                 return [];
         }
+
         return $rules;
     }
 
@@ -55,7 +56,7 @@ class IngredientRequest extends FormRequest
             'ingredient_name.unique' => 'Ingredient name should be unique!'
         ];
 
-        foreach(PizzaSize::all() as $pizzaSize) {
+        foreach (PizzaSize::all() as $pizzaSize) {
             $messages += [ 'size_' . $pizzaSize->id . '.regex' => 'Price for ' . $pizzaSize->size_name . ' should be a number!'];
             $messages += [ 'size_' . $pizzaSize->id . '.required' => 'Price for ' . $pizzaSize->size_name . ' size is required!'];
         }
