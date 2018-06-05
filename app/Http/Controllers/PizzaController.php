@@ -112,7 +112,39 @@ class PizzaController extends Controller
      */
     public function update(PizzaRequest $request, Pizza $pizza)
     {
-        //
+        $pizza->update([
+            'pizza_name' => $request->pizza_name,
+            'pizza_description' => $request->pizza_description,
+            'pizza_spiciness' => $request->pizza_spiciness,
+            'category_id' => $request->pizza_category
+        ]);
+
+        /**
+         * As we have pivot with value, we have to sync like this. All prices are required, so we are using syncWithoutDetaching.
+         *
+         * @var int $key
+         * @var number $price
+         */
+        foreach ($request->all()['pizza_price'] as $key => $price) {
+            $pizza
+                ->pizzaSizes()
+                ->syncWithoutDetaching([
+                    $key => [
+                        'pizza_size_price' => $price
+                    ]
+                ]);
+        }
+
+        /**
+         * we are sending a table of ingredients' ids to sync in pivot.
+         */
+        $pizza
+            ->ingredients()
+            ->sync($request->all()['ingredients']);
+
+        return redirect()
+            ->route('pizza.index')
+            ->with('success', 'Pizza ' . $pizza->pizza_name . ' was modify!');
     }
 
     /**
