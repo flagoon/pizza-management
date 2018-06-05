@@ -28,7 +28,7 @@
                 <tr>
                     <td colspan="7">
                         <h5 class="alert alert-primary">
-                            🍕🍕🍕 Category: {{ $sortedPizzas[0]->category->category_name }}
+                            Category: {{ $sortedPizzas[0]->category->category_name }}
                         </h5>
                     </td>
                 </tr>
@@ -39,7 +39,7 @@
                                 <div class="d-block col-8">{{ $pizza->pizza_name }}</div>
                                 <div class="col-4">
                                     @for($i = 0; $i < $pizza->pizza_spiciness; $i++)
-                                        <span class="text-danger">🍕</span>
+                                        <i class="em em-hot_pepper" style="font-size: 0.6rem;"></i>
                                     @endfor
                                 </div>
                             </div>

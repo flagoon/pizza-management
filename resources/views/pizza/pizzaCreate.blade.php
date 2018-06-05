@@ -40,23 +40,23 @@
                 </label>
                 <select class="col-2 form-control text-danger" name="pizza_spiciness" id="pizza_spiciness">
                     <option selected value="0" class="alert-primary">0</option>
-                    <option value="1" class="alert-success">🍕</option>
-                    <option value="2" class="alert-warning">🍕🍕</option>
-                    <option value="3" class="alert-danger">🍕🍕🍕</option>
+                    <option value="1" class="alert-success">1</option>
+                    <option value="2" class="alert-warning">2</option>
+                    <option value="3" class="alert-danger">3</option>
                 </select>
             </div>
             @foreach(\App\Model\PizzaSize::all() as $size)
                 <div class="row form-group col-12">
                         <label
                                 class="col-3 mt-2"
-                                for="pizza_name">
+                                for="pizza_price[{{ $size->id }}]">
                             {{ title_case($size->size_name) }} pizza price:
                         </label>
                         <input
                                 type="text"
                                 class="col-1 form-control"
                                 name="pizza_price[{{ $size->id }}]"
-                                id="small">
+                                id="pizza_price[{{ $size->id }}]">
                 </div>
             @endforeach
             <div class="row form-group col-12">
