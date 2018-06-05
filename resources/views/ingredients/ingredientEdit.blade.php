@@ -5,6 +5,7 @@
         <form action="{{ route('ingredients.update', [ 'id' => $ingredient->id ]) }}" method="POST" class="row container-fluid col-12">
             @csrf
             @method('PUT')
+
             <input type="hidden" value="{{ $ingredient->id }}" name="id">
             <div class="row form-group col-12">
                 <label for="ingredient_name" class="col-3 mt-2">Ingredient name</label>
@@ -25,6 +26,7 @@
             </div>
             <div class="row form-group col-12">
                 <h3>Prices for sizes</h3>
+
                 @foreach($pizzaSizes as $key => $pizzaSize)
                     <div class="col-12 form-group row">
                         <label for="size_{{ $pizzaSize->id }}" class="col-2 mt-2">
@@ -36,8 +38,11 @@
                                 class="col-2 form-control" value="{{ $ingredient->pizzaSizes[$key]->pivot->ingredient_size_price }}">
                     </div>
                 @endforeach
+
             </div>
+
             @include('errors.form-error')
+
             <div class="col-12">
                 <button class="btn btn-primary col-4">
                     Submit
