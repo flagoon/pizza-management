@@ -9,6 +9,7 @@
             @csrf
             @method('PUT')
 
+            <input type="hidden" value="{{ $pizza->id }}" id="id" name="id">
             <div class="row form-group col-12">
                 <label
                         class="col-2 mt-2"
