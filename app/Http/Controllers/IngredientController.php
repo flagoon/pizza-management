@@ -103,6 +103,7 @@ class IngredientController extends Controller
      */
     public function update(IngredientRequest $request, Ingredient $ingredient)
     {
+        // TODO: it could be an array, not multiple request position. REDO!!
         $pizzaSizePrices = $request->except([
             '_token', '_method', 'ingredient_name', 'ingredient_description', 'id'
         ]);
