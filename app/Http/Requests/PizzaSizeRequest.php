@@ -24,9 +24,6 @@ class PizzaSizeRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
-            case 'GET':
-            case 'DELETE':
-                return [];
             case 'POST':
                 return [
                         'size_name' => 'required|min:3|unique:pizza_sizes,size_name',
