@@ -20,7 +20,6 @@ class CategorySeeder extends Seeder
 
         DB::table('categories')->insert([
             'category_name' => 'vege',
-            'category_icon' => 'vege.jpg',
             'category_description' => 'who eats it?',
             'created_at' => now(),
             'updated_at' => now()
@@ -28,7 +27,6 @@ class CategorySeeder extends Seeder
 
         DB::table('categories')->insert([
             'category_name' => 'meat tornado',
-            'category_icon' => 'meat-tornado.jpg',
             'created_at' => now(),
             'updated_at' => now()
         ]);
