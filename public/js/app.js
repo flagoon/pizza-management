@@ -35915,13 +35915,16 @@ if (document.getElementById('category-pic')) {
   var origin = window.location.origin;
   var picture = document.getElementById('category-pic');
   var correctPath = picture.getAttribute('src');
-  var badPath = origin + '/storage/category/remove-category-icon.jpg';
+  var badPath = origin + '/storage/remove-category-icon.jpg';
+
   picture.addEventListener('mouseover', function () {
     picture.setAttribute('src', badPath);
   });
+
   picture.addEventListener('mouseout', function () {
     picture.setAttribute('src', correctPath);
   });
+
   picture.addEventListener('click', function () {
     axios({
       method: 'delete',
