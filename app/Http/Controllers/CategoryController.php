@@ -17,7 +17,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.categories', ['categories' => Category::all()->sortBy('category_name')]);
+        return view('category.categoriesList', ['categories' => Category::all()]);
+    }
+
+    /**
+     * Show the form for creating a new category.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('category.categoriesCreate');
     }
 
     /**
@@ -40,7 +50,9 @@ class CategoryController extends Controller
             'category_icon' => $path
         ]);
 
-        return redirect()->route('categories.index');
+        return redirect()
+            ->route('categories.index')
+            ->with('success', 'Category ' . $category->category_name . ' created!');
     }
 
     /**
@@ -62,7 +74,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('category.edit', ['category' => $category]);
+        return view('category.categoriesEdit', ['category' => $category]);
     }
 
     /**
@@ -74,10 +86,13 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $newCategory, Category $category)
     {
-        Category::deleteImageIfAvailable($category);
+        // if new request has new image, it will remove old one.
+        if(isset($newCategory->category_icon)) {
+            Category::deleteImageIfAvailable($category);
+        }
 
+        // new image will be save in folder and return path to it.
         $path = Category::saveFileIfAvailable($newCategory);
-
         if (!$path) {
             $path = $category->category_icon;
         }
@@ -88,7 +103,9 @@ class CategoryController extends Controller
             'category_description' => $newCategory->category_description
         ]);
 
-        return redirect()->route('categories.edit', ['id' => $category->id]);
+        return redirect()
+            ->route('categories.index')
+            ->with('success', 'Category ' . $newCategory->category_name . ' was changed!');
     }
 
     /**
@@ -99,14 +116,21 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        // when category is removed, all pizzas with that category will be assign 'other' category
+        $category->pizzas()->update(['category_id' => 1]);
+
+        // if category has icon, icon will be removed.
         if ($category->category_icon) {
-            Storage::disk('public')->delete($category->category_icon);
+            Storage::disk('public')
+                ->delete($category->category_icon);
         }
 
         try {
             $category->delete();
         } catch (\Exception $exception) {
-            return redirect()->route('categories.index')->withErrors([
+            return redirect()
+                ->route('categories.index')
+                ->withErrors([
                 'error.exception' => $exception
             ]);
         }
@@ -114,6 +138,7 @@ class CategoryController extends Controller
         return redirect()->route('categories.index');
     }
 
+    // TODO: remove icon by clicking. Need to take care of CORS.
     public function deleteIcon(Request $request)
     {
         return $request;
